@@ -1,0 +1,67 @@
+﻿<Window x:Class="AromaDom.MaterialEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Арома Дом"
+        Style="{StaticResource AppWindow}"
+        Width="480" Height="700"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterOwner"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+    <Grid Margin="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="HeaderTextBlock" Grid.Row="0"
+                   FontSize="22" FontWeight="Bold" Margin="0,0,0,15"
+                   Foreground="{StaticResource AccentBrush}"/>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,10,0">
+                <TextBlock Text="Тип материала" Style="{StaticResource FieldLabel}"/>
+                <ComboBox x:Name="TypeComboBox"
+                          DisplayMemberPath="Name" SelectedValuePath="Id"
+                          SelectionChanged="Field_Changed"/>
+
+                <TextBlock Text="Наименование" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="NameTextBox" MaxLength="250"
+                         TextChanged="Field_Changed"/>
+
+                <TextBlock Text="Цена единицы, р (не меньше 0, до сотых)" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="PriceTextBox"
+                         ToolTip="Например: 450,00"
+                         TextChanged="Field_Changed"/>
+
+                <TextBlock Text="Единица измерения" Style="{StaticResource FieldLabel}"/>
+                <ComboBox x:Name="UnitComboBox"
+                          DisplayMemberPath="Name" SelectedValuePath="Id"
+                          SelectionChanged="Field_Changed"/>
+
+                <TextBlock Text="Количество в упаковке (больше 0)" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="PackageTextBox"
+                         ToolTip="Например: 20 или 0,5"
+                         TextChanged="Field_Changed"/>
+
+                <TextBlock Text="Количество на складе (не меньше 0)" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="StockTextBox"
+                         ToolTip="Например: 120 или 18,5"
+                         TextChanged="Field_Changed"/>
+
+                <TextBlock Text="Минимальное количество (не меньше 0)" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="MinimumTextBox"
+                         ToolTip="Например: 40"
+                         TextChanged="Field_Changed"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button Content="Назад" Style="{StaticResource SecondaryButton}"
+                    Margin="0,0,10,0" Click="BackButton_Click"/>
+            <Button Content="Сохранить" IsDefault="True" Click="SaveButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
