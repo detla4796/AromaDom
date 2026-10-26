@@ -77,5 +77,20 @@ namespace AromaDom
                 LoadMaterials();
             }
         }
+
+        private void ProductsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var material = button.DataContext as Material;
+
+            if (material == null)
+            {
+                return;
+            }
+
+            var productsWindow = new MaterialProductsWindow(material.MaterialId, material.MaterialName);
+            productsWindow.Owner = this;
+            productsWindow.ShowDialog();
+        }
     }
 }

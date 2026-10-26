@@ -10,7 +10,7 @@ namespace AromaDom.Data
 {
     public class MaterialRepository
     {
-        private const string ConnectionString =
+        public const string ConnectionString =
             "Server=DESKTOP-456A60L\\MSSQLSERVER01;Database=AromaDom;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public List<Material> GetMaterials()
@@ -46,6 +46,37 @@ namespace AromaDom.Data
             }
 
             return materials;
+        }
+
+        public List<MaterialProduct> GetProductsByMaterial(int materialId)
+        {
+            var products = new List<MaterialProduct>();
+            const string sql =
+                "select ProductId, Article, ProductName, QuantityPerUnit, UnitSymbol " +
+                "from vMaterialProducts where MaterialId = @id order by ProductName";
+
+            using (var connection = new SqlConnection(ConnectionString))
+            using (var command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@id", materialId);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        products.Add(new MaterialProduct
+                        {
+                            ProductId = reader.GetInt32(0),
+                            Article = reader.GetString(1),
+                            ProductName = reader.GetString(2),
+                            QuantityPerUnit = reader.GetDecimal(3),
+                            UnitSymbol = reader.GetString(4)
+                        });
+                    }
+                }
+            }
+
+            return products;
         }
 
         public List<LookupItem> GetMaterialTypes()

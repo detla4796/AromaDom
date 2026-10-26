@@ -44,10 +44,9 @@
                             </StackPanel>
 
                             <StackPanel Grid.Column="1" HorizontalAlignment="Right">
-                                <TextBlock Text="{Binding PriceText}" FontWeight="Bold"
-                                           TextAlignment="Right"/>
-                                <TextBlock Text="{Binding RequiredText}" Margin="0,6,0,0"
-                                           TextAlignment="Right"/>
+                                <TextBlock Text="{Binding PriceText}" FontWeight="Bold" TextAlignment="Right"/>
+                                <TextBlock Text="{Binding RequiredText}" Margin="0,6,0,0" TextAlignment="Right"/>
+                                <Button Content="Продукция" Margin="0,10,0,0" Padding="12,6" HorizontalAlignment="Right" Click="ProductsButton_Click"/>
                             </StackPanel>
                         </Grid>
                     </Border>
